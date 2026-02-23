@@ -6,5 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Colocation extends Model
 {
-    //
+    protected $fillable = ['colocation_name','status'];
+
+    public function user(){
+        return $this->belongsTo(User::class,'usercolocation')
+        ->withPivot(['role', 'status'])->withTimestamps();
+    }
+
+     public function expenses(){
+        return $this->hasMany(Depense::class);
+    }
+
+    public function categories(){
+        return $this->hasMany(Categorie::class);
+    }
+
+    public function invitation(){
+        return $this->hasMany(Invitation::class);
+    }
 }
