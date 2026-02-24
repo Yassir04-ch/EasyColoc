@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categorie;
+use App\Models\Colocation;
 use Illuminate\Http\Request;
 
 class CategorieController extends Controller
@@ -12,15 +13,15 @@ class CategorieController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Colocation $colocation)
     {
-        //
+       return view("categorie.create",compact("colocation"));
     }
 
     /**
@@ -28,7 +29,13 @@ class CategorieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = $request->validate([
+            'categorie_name'=>'required|string',
+            'colocation_id'=>'required'
+        ]);
+
+        Categorie::create($validation);
+        return redirect()->route('categorie.index');
     }
 
     /**
@@ -44,7 +51,7 @@ class CategorieController extends Controller
      */
     public function edit(Categorie $categorie)
     {
-        //
+        return view("categorie.edit",compact('categorie'));
     }
 
     /**
@@ -52,7 +59,13 @@ class CategorieController extends Controller
      */
     public function update(Request $request, Categorie $categorie)
     {
-        //
+       $validation = $request->validate([
+        'categorie_name'=>'required|string',
+       ]);
+
+       $categorie->update($validation);
+
+       return redirect()->route('categorie.index');
     }
 
     /**
@@ -60,6 +73,8 @@ class CategorieController extends Controller
      */
     public function destroy(Categorie $categorie)
     {
-        //
+        $categorie->delete();
+
+        return redirect()->route('categorie.index');
     }
 }

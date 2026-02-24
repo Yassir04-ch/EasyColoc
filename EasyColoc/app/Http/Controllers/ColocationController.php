@@ -12,7 +12,9 @@ class ColocationController extends Controller
      */
     public function index()
     {
-        //
+        $colocations = Colocation::all();
+
+        return view('colocation.index',compact("colocations"));
     }
 
     /**
@@ -20,7 +22,7 @@ class ColocationController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**

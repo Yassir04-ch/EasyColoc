@@ -2,25 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categorie;
 use App\Models\Depense;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DepenseController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if($request->filter || $request->filter != "All Depenses" ){
+
+        $depenses = Depense::with(['user','colocation','categorie'])->where('date',$request->filter)->get();
+            
+        }
+        else{
+
+        $depenses = Depense::with(['user','colocation','categorie'])->get();
+
+        }
+      
+        return view('depense.index',compact($depenses));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Depense $depense , Categorie $categorie)
     {
-        //
+        return view("depense.create",compact('depense','categorie'));
     }
 
     /**
@@ -28,7 +41,18 @@ class DepenseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = $request->validate([
+            'titre' => 'required|string',
+            'price' => 'required',
+            'date' => 'required',
+            'colocation_id'=> 'required',
+            'categorie_id'=> 'required',
+        ]);
+        
+        $validation['user_id'] = Auth::id();
+
+        Depense::create($validation);
+        return redirect()->route('depense.index');
     }
 
     /**
@@ -36,7 +60,7 @@ class DepenseController extends Controller
      */
     public function show(Depense $depense)
     {
-        //
+        return view('depense.show',compact('depense'));
     }
 
     /**
@@ -44,7 +68,7 @@ class DepenseController extends Controller
      */
     public function edit(Depense $depense)
     {
-        //
+        return view('depense.edit',compact('depence'));
     }
 
     /**
@@ -52,7 +76,14 @@ class DepenseController extends Controller
      */
     public function update(Request $request, Depense $depense)
     {
-        //
+        $validation = $request->validate([
+            'titre' => 'required|string',
+            'price' => 'required',
+            'date' => 'required',
+        ]);
+
+        $depense->update($validation);
+        return redirect()->route('depense.index');
     }
 
     /**
@@ -60,6 +91,8 @@ class DepenseController extends Controller
      */
     public function destroy(Depense $depense)
     {
-        //
+        $depense->delete();
+        return redirect()->route('depense.index');
+
     }
 }

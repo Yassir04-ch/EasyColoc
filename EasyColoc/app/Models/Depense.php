@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Depense extends Model
 {
-    protected $fillable = ['titre','price','date'];
+    protected $fillable = ['titre','price','date','user_id','colocation_id','categorie_id'];
 
     public function user(){
         return $this->belongsTo(User::class);

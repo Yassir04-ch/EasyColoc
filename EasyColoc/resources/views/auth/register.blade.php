@@ -1,114 +1,58 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>EasyColoc — Inscription</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-</head>
-<body class="bg-[#0d0d0d] text-white font-['Outfit',sans-serif] min-h-screen">
+<x-guest-layout>
+    <form method="POST" action="{{ route('register') }}">
+        @csrf
 
-<!-- NAV -->
-<nav class="flex items-center justify-between px-6 md:px-16 py-4 border-b border-white/5">
-  <a href="index.html" class="flex items-center gap-3 no-underline">
-    <div class="w-9 h-9 bg-[#00e5a0] rounded-xl flex items-center justify-center text-black font-bold text-lg">🏠</div>
-    <span class="text-xl font-bold text-white">Easy<span class="text-[#00e5a0]">Coloc</span></span>
-  </a>
-  <a href="login.html" class="text-sm font-medium px-5 py-2 rounded-lg border border-white/10 text-[#888] hover:text-white hover:border-white/20 transition-all no-underline">
-    Connexion
-  </a>
-</nav>
-
-<!-- MAIN -->
-<main class="flex items-center justify-center min-h-[calc(100vh-73px)] px-4 py-12 relative overflow-hidden">
-
-  <!-- Blobs -->
-  <div class="absolute w-[500px] h-[500px] bg-[#ff4f91] rounded-full blur-[140px] opacity-[0.06] -top-40 -right-40 pointer-events-none"></div>
-  <div class="absolute w-[400px] h-[400px] bg-[#00e5a0] rounded-full blur-[140px] opacity-[0.06] -bottom-40 -left-40 pointer-events-none"></div>
-
-  <!-- CARD -->
-  <div class="relative z-10 w-full max-w-md">
-    <div class="bg-[#141414] border border-white/[0.08] rounded-3xl p-8 md:p-10">
-
-      <!-- Header -->
-      <div class="text-center mb-8">
-        <div class="w-14 h-14 bg-[#00e5a0]/10 border border-[#00e5a0]/20 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4">🏠</div>
-        <h1 class="text-2xl font-bold mb-1">Créez votre compte</h1>
-        <p class="text-[#666] text-sm">Rejoignez EasyColoc et gérez votre coloc sereinement</p>
-      </div>
-
-      <!-- Form -->
-      <form action="#" method="POST" class="flex flex-col gap-4">
-
-        <!-- Name row -->
-        <div class="grid grid-cols-2 gap-3">
-          <div class="flex flex-col gap-1.5">
-            <label class="text-sm font-medium text-[#aaa]">Prénom</label>
-            <input type="text" name="firstname"
-            class="bg-[#1a1a1a] border border-white/[0.08] focus:border-[#00e5a0]/50 focus:outline-none text-white text-sm px-4 py-3 rounded-xl placeholder-[#444] transition-colors"/>
-          </div>
-          <div class="flex flex-col gap-1.5">
-            <label class="text-sm font-medium text-[#aaa]">Nom</label>
-            <input type="text"  name="lastname"
-            class="bg-[#1a1a1a] border border-white/[0.08] focus:border-[#00e5a0]/50 focus:outline-none text-white text-sm px-4 py-3 rounded-xl placeholder-[#444] transition-colors" />
-          </div>
+        <!-- Name -->
+        <div>
+            <x-input-label for="firstname" :value="__('firstname')" />
+            <x-text-input id="firstname" class="block mt-1 w-full" type="text" name="firstname" :value="old('firstname')" required autofocus autocomplete="firstname" />
+            <x-input-error :messages="$errors->get('firstname')" class="mt-2" />
         </div>
 
-        <!-- Email -->
-        <div class="flex flex-col gap-1.5">
-          <label class="text-sm font-medium text-[#aaa]">Adresse email</label>
-          <input
-            type="email"
-            name="email"
-            placeholder="exemple@email.com"
-            class="bg-[#1a1a1a] border border-white/[0.08] focus:border-[#00e5a0]/50 focus:outline-none text-white text-sm px-4 py-3 rounded-xl placeholder-[#444] transition-colors"
-          />
+        <div>
+            <x-input-label for="lastname" :value="__('Lastname')" />
+            <x-text-input id="lastname" class="block mt-1 w-full" type="text" name="lastname" :value="old('lastname')" required autofocus autocomplete="lastname" />
+            <x-input-error :messages="$errors->get('lastname')" class="mt-2" />
+        </div>
+
+        <!-- Email Address -->
+        <div class="mt-4">
+            <x-input-label for="email" :value="__('Email')" />
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+            <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <!-- Password -->
-        <div class="flex flex-col gap-1.5">
-          <label class="text-sm font-medium text-[#aaa]">Mot de passe</label>
-          <input
-            type="password"
-            name="password"
-            placeholder="Min. 8 caractères"
-            class="bg-[#1a1a1a] border border-white/[0.08] focus:border-[#00e5a0]/50 focus:outline-none text-white text-sm px-4 py-3 rounded-xl placeholder-[#444] transition-colors"
-          />
+        <div class="mt-4">
+            <x-input-label for="password" :value="__('Password')" />
+
+            <x-text-input id="password" class="block mt-1 w-full"
+                            type="password"
+                            name="password"
+                            required autocomplete="new-password" />
+
+            <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
+        <!-- Confirm Password -->
+        <div class="mt-4">
+            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
 
-        <!-- Terms -->
-        <div class="flex items-start gap-3">
-          <input type="checkbox" id="terms" name="terms"
-            class="w-4 h-4 mt-0.5 accent-[#00e5a0] cursor-pointer flex-shrink-0"/>
-          <label for="terms" class="text-xs text-[#555] cursor-pointer leading-relaxed">
-            J'accepte les
-            <a href="#" class="text-[#00e5a0] hover:underline no-underline">Conditions d'utilisation</a>
-            et la
-            <a href="#" class="text-[#00e5a0] hover:underline no-underline">Politique de confidentialité</a>
-          </label>
+            <x-text-input id="password_confirmation" class="block mt-1 w-full"
+                            type="password"
+                            name="password_confirmation" required autocomplete="new-password" />
+
+            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
-        <!-- Submit -->
-        <button type="submit"
-          class="w-full bg-[#00e5a0] text-black font-bold py-3.5 rounded-xl text-sm hover:opacity-90 hover:-translate-y-0.5 transition-all mt-1">
-          Créer mon compte →
-        </button>
+        <div class="flex items-center justify-end mt-4">
+            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
+                {{ __('Already registered?') }}
+            </a>
 
-       
-      </form>
-
-      <!-- Footer link -->
-      <p class="text-center text-sm text-[#555] mt-6">
-        Déjà un compte ?
-        <a href="" class="text-[#00e5a0] font-semibold hover:underline no-underline ml-1">Se connecter</a>
-      </p>
-
-    </div>
-
-  </div>
-</main>
-
-</body>
-</html>
+            <x-primary-button class="ms-4">
+                {{ __('Register') }}
+            </x-primary-button>
+        </div>
+    </form>
+</x-guest-layout>
