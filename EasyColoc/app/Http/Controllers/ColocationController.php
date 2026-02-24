@@ -31,21 +31,21 @@ class ColocationController extends Controller
      */
   public function store(Request $request)
 {
-    $request->validate([
-        'name' => 'required|string|max:255',
+    
+    $validation = $request->validate([
+         'colocation_name' => 'required|string'
     ]);
 
-    $colocation = Colocation::create([
-        'colocation_name'   => $request->name,
-        'status' => 'active',
-    ]);
+    $validation['status'] = 'active';
+
+    $colocation = Colocation::create($validation);
 
     $colocation->user()->attach(Auth::id(), [
         'role'      => 'owner',
         'status'    => 'active',
     ]);
 
-    return redirect()->route('colocation.index');
+    return redirect('/');
 }
 
     /**
@@ -54,7 +54,7 @@ class ColocationController extends Controller
     public function show(Colocation $colocation)
     {
         $colocation->load(['users', 'expenses', 'categories']);
-    return view('colocation.show', compact('colocation'));
+      return view('colocation.show', compact('colocation'));
     }
 
     /**

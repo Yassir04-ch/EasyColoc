@@ -54,15 +54,6 @@
         </div>
       </div>
 
-      <!-- Errors -->
-      @if ($errors->any())
-        <div class="bg-[#ff4f91]/10 border border-[#ff4f91]/30 rounded-xl px-4 py-3 mb-6">
-          @foreach ($errors->all() as $error)
-            <p class="text-[#ff4f91] text-sm">⚠️ {{ $error }}</p>
-          @endforeach
-        </div>
-      @endif
-
       <!-- Success -->
       @if (session('success'))
         <div class="bg-[#00e5a0]/10 border border-[#00e5a0]/30 rounded-xl px-4 py-3 mb-6">
@@ -73,7 +64,7 @@
       <!-- Form -->
       <form action="{{ route('colocation.store') }}" method="POST" class="flex flex-col gap-5">
         @csrf
-
+        @method('post')
         <!-- Nom colocation -->
         <div class="flex flex-col gap-1.5">
           <label class="text-sm font-medium text-[#aaa]">Nom de la colocation</label>
@@ -90,9 +81,6 @@
           </div>
           <div class="flex items-center gap-2 text-sm text-[#777]">
             <span class="text-[#00e5a0]">✓</span> Votre rôle : <span class="text-[#ffe234] font-medium ml-1">Owner 👑</span>
-          </div>
-          <div class="flex items-center gap-2 text-sm text-[#777]">
-            <span class="text-[#00e5a0]">✓</span> Vous pourrez inviter des membres ensuite
           </div>
         </div>
 
