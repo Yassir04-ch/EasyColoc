@@ -9,8 +9,7 @@ class Colocation extends Model
     protected $fillable = ['colocation_name','status'];
 
     public function user(){
-        return $this->belongsTo(User::class,'usercolocation')
-        ->withPivot(['role', 'status'])->withTimestamps();
+        return $this->belongsToMany(User::class,'user_colocation')->withPivot(['role', 'status']);
     }
 
      public function expenses(){
