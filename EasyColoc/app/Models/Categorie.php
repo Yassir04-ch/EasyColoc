@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Categorie extends Model
 {
-    protected $fillable = ['categorie_name'];
+    protected $fillable = ['categorie_name','colocation_id'];
 
     public function colocation(){
         return $this->belongsTo(Colocation::class);

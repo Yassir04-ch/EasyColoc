@@ -10,10 +10,6 @@
 <body class="bg-[#0d0d0d] text-white font-['Outfit',sans-serif] min-h-screen">
 
 <nav class="flex items-center justify-between px-6 md:px-16 py-4 border-b border-white/5 sticky top-0 z-50 bg-[#0d0d0d]/90 backdrop-blur-xl">
-  <a href="{{ route('colocation.index') }}" class="flex items-center gap-3 no-underline">
-    <div class="w-9 h-9 bg-[#00e5a0] rounded-xl flex items-center justify-center text-black font-bold text-lg">🏠</div>
-    <span class="text-xl font-bold text-white">Easy<span class="text-[#00e5a0]">Coloc</span></span>
-  </a>
   @if(Auth::id() == $owner->id)
     <div class="bg-[#1a1a1a] border border-dashed border-white/20 rounded-3xl p-6 mb-8">
         <h3 class="text-sm font-bold text-[#00e5a0] uppercase tracking-widest mb-4 italic">+ Ajouter un membre</h3>
@@ -29,11 +25,12 @@
             @method('delete')
             <button type="submit" class="bg-red-500/100 text-black font-bold px-6 py-3 rounded-xl text-sm hover:scale-105 transition-all">Desactive Colocation</button>
         </form>
+    <div class="flex items-center gap-4 text-[#888] text-sm italic">  
+        <a href="{{route('categorie.create',$colocation)}}" class="block w-full text-center bg-white/5 text-[#888] hover:text-white border border-white/[0.07] text-sm font-semibold py-2.5 rounded-xl transition-all no-underline">
+        + Ajouter Categorie
+        </a>
+    </div>
    @endif
-  <div class="flex items-center gap-4 text-[#888] text-sm italic">  
-    <a href="{{route('categorie.create',$colocation)}}" class="block w-full text-center bg-white/5 text-[#888] hover:text-white border border-white/[0.07] text-sm font-semibold py-2.5 rounded-xl transition-all no-underline">
-    </a>
-  </div>
 </nav>
 
 <main class="px-6 md:px-16 py-10 max-w-6xl mx-auto">

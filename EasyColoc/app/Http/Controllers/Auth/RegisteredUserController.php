@@ -56,7 +56,13 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
+        if($user->role == 'admin'){
+         return redirect()->route('admin.index');
+        }
+        else{
+         return redirect()->route('colocation.index');
 
-        return redirect(route('dashboard', absolute: false));
+        }
+
     }
 }

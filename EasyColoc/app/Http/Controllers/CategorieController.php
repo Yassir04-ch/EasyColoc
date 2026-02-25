@@ -35,7 +35,7 @@ class CategorieController extends Controller
         ]);
 
         Categorie::create($validation);
-        return redirect()->route('categorie.index');
+        return redirect()->route('colocation.index');
     }
 
     /**

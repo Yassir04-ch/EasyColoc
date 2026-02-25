@@ -110,6 +110,7 @@
 
       <div class="bg-[#141414] border border-white/5 rounded-2xl p-5 hover:-translate-y-0.5 transition-all">
         <div class="flex items-center justify-between mb-3">
+         <p class="text-3xl font-extrabold text-white">{{$usersban->count()}}</p>
           <p class="text-[#555] text-xs font-medium">Utilisateurs bannis</p>
           <div class="w-8 h-8 bg-[#ff4f91]/10 rounded-lg flex items-center justify-center text-sm">🚫</div>
         </div>
