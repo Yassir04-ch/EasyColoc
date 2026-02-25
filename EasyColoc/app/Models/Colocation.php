@@ -8,7 +8,7 @@ class Colocation extends Model
 {
     protected $fillable = ['colocation_name','status'];
 
-    public function user(){
+    public function users(){
         return $this->belongsToMany(User::class,'user_colocation')->withPivot(['role', 'status']);
     }
 

@@ -21,10 +21,11 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('colocation',ColocationController::class);
 
-Route::middleware('admin')->
-Route::put('/admin/{user}/bannir',[AdminController::class,'bannir'])->name('admin.bannir');
-Route::put('/admin/{user}/debannir',[AdminController::class,'debannir'])->name('admin.debannir');
-Route::get('/admin',[AdminController::class,'index'])->name('admin.index');
+Route::middleware('CheckBanned')->group(function(){
+    Route::put('/admin/{user}/bannir',[AdminController::class,'bannir'])->name('admin.bannir');
+    Route::put('/admin/{user}/debannir',[AdminController::class,'debannir'])->name('admin.debannir');
+    Route::get('/admin',[AdminController::class,'index'])->name('admin.index');
 
+});
 
 require __DIR__.'/auth.php';

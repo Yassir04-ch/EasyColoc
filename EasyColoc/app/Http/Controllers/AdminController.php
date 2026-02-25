@@ -12,8 +12,9 @@ class AdminController extends Controller
      */
     public function index()
     {
+        $usersban = User::where('status_account','banni');
         $users = User::with('role')->get();
-        return view('admin.dashboard',compact('users'));
+        return view('admin.dashboard',compact('users','usersban'));
     }
 
     public function bannir(User $user){

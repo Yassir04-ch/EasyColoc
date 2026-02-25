@@ -13,7 +13,9 @@ class ColocationController extends Controller
      */
     public function index()
     {
-        $colocations = Colocation::all();
+      $colocations = Colocation::with('users')->whereHas('users',function ($query) {
+       $query->where('users.id',Auth::id());
+      })->get();
 
         return view('colocation.index',compact("colocations"));
     }
@@ -32,6 +34,15 @@ class ColocationController extends Controller
   public function store(Request $request)
   {
 
+       $colocation = Colocation::with('users')->whereHas('users',function ($query) {
+       $query->where('users.id',Auth::id());
+         })->where('status','active')->first();
+        
+         if ($colocation) {
+              return redirect()->route('colocation.index')->with('error','you have arealy colocation active');
+         }
+
+
         $validation = $request->validate([
             'colocation_name' => 'required|string'
         ]);
@@ -40,7 +51,7 @@ class ColocationController extends Controller
 
         $colocation = Colocation::create($validation);
 
-        $colocation->user()->attach(Auth::id(), [
+        $colocation->users()->attach(Auth::id(), [
             'role'      => 'owner',
             'status'    => 'active',
         ]);
