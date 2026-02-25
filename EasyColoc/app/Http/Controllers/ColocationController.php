@@ -30,23 +30,23 @@ class ColocationController extends Controller
      * Store a newly created resource in storage.
      */
   public function store(Request $request)
-{
-    
-    $validation = $request->validate([
-         'colocation_name' => 'required|string'
-    ]);
+  {
 
-    $validation['status'] = 'active';
+        $validation = $request->validate([
+            'colocation_name' => 'required|string'
+        ]);
 
-    $colocation = Colocation::create($validation);
+        $validation['status'] = 'active';
 
-    $colocation->user()->attach(Auth::id(), [
-        'role'      => 'owner',
-        'status'    => 'active',
-    ]);
+        $colocation = Colocation::create($validation);
 
-    return redirect('/');
-}
+        $colocation->user()->attach(Auth::id(), [
+            'role'      => 'owner',
+            'status'    => 'active',
+        ]);
+
+        return redirect()->route('colocation.index');
+    }
 
     /**
      * Display the specified resource.

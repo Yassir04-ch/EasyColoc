@@ -60,10 +60,10 @@
   <!-- CTAs -->
   <div class="relative z-10 flex flex-wrap gap-4 justify-center">
     <a href="#" class="bg-[#00e5a0] text-black font-bold px-8 py-4 rounded-xl text-base hover:opacity-90 hover:-translate-y-1 transition-all no-underline flex items-center gap-2">
-      🚀 Créer ma colocation
+      🚀 S'inscrire
     </a>
     <a href="#how" class="border border-white/10 text-white font-medium px-8 py-4 rounded-xl text-base hover:bg-white/5 transition-all no-underline flex items-center gap-2">
-      📖 Comment ça marche
+      Connection
     </a>
   </div>
 
