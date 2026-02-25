@@ -64,8 +64,8 @@ class ColocationController extends Controller
      */
     public function show(Colocation $colocation)
     {
-        $colocation->load(['users', 'expenses', 'categories']);
-      return view('colocation.show', compact('colocation'));
+        $owner = $colocation->users->where('pivot.role', 'owner')->first();
+        return view('colocation.detail',compact('colocation','owner'));
     }
 
     /**
@@ -73,7 +73,7 @@ class ColocationController extends Controller
      */
     public function edit(Colocation $colocation)
     {
-        //
+        return view('colocation.detail',compact('colocation'));
     }
 
     /**
@@ -90,7 +90,6 @@ class ColocationController extends Controller
     public function destroy(Colocation $colocation)
     {
          $colocation->update(['status' => 'cancelled']);
-
          return redirect()->route('colocation.index');
     }
 }

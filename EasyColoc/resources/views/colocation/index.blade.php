@@ -59,7 +59,7 @@
       </div>
 
       <div class="pt-1 border-t border-white/[0.04]">
-        <a href="" class="block w-full text-center bg-white/5 text-[#888] hover:text-white border border-white/[0.07] text-sm font-semibold py-2.5 rounded-xl transition-all no-underline">
+        <a href="{{route('colocation.show',$colocation)}}" class="block w-full text-center bg-white/5 text-[#888] hover:text-white border border-white/[0.07] text-sm font-semibold py-2.5 rounded-xl transition-all no-underline">
           Détails de la colocation
         </a>
       </div>
