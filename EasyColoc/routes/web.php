@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ColocationController;
 use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\DepenseController;
 use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\ProfileController;
  use Illuminate\Support\Facades\Route;
@@ -20,6 +21,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+    Route::get('/depense/{colocation}/create',[DepenseController::class,'create'])->name('depense.create');
+    Route::resource('depense',DepenseController::class);
 
 
  Route::middleware('CheckBanned')->group(function(){

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categorie;
+use App\Models\Colocation;
 use App\Models\Depense;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,26 +15,15 @@ class DepenseController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->filter || $request->filter != "All Depenses" ){
-
-        $depenses = Depense::with(['user','colocation','categorie'])->where('date',$request->filter)->get();
-            
-        }
-        else{
-
-        $depenses = Depense::with(['user','colocation','categorie'])->get();
-
-        }
-      
-        return view('depense.index',compact($depenses));
+        
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Depense $depense , Categorie $categorie)
+    public function create( Colocation $colocation)
     {
-        return view("depense.create",compact('depense','categorie'));
+        return view("depense.create",compact('colocation'));
     }
 
     /**
