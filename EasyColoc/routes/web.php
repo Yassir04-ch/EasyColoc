@@ -27,7 +27,6 @@ Route::middleware('auth')->group(function () {
     Route::put('/admin/{user}/debannir',[AdminController::class,'debannir'])->name('admin.debannir');
     Route::get('/admin',[AdminController::class,'index'])->name('admin.index');
     Route::resource('categorie',CategorieController::class);
-
 });
 
 require __DIR__.'/auth.php';

@@ -14,8 +14,14 @@
     <div class="w-9 h-9 bg-[#00e5a0] rounded-xl flex items-center justify-center text-black font-bold text-lg">🏠</div>
     <span class="text-xl font-bold text-white">Easy<span class="text-[#00e5a0]">Coloc</span></span>
   </div>
+  <div class="flex items-center gap-3">
+    <a href="{{route('colocation.create')}}"><span class="text-sm italic">+ Create New Colocation</span></a>
+  </div>
   <div>
-    <a href="{{route('colocation.create')}}"><span class="text-[#888] text-sm italic">+ Create New Colocation</span></a>
+    <form method="POST" action="{{ route('logout') }}">
+       @csrf
+       <button class="text-sm text-[#888] hover:text-white transition-colors">Déconnexion</button>
+    </form>
   </div>
 </nav>
 
@@ -57,12 +63,13 @@
           <p class="text-[#555] text-xs mt-0.5">Membres</p>
         </div>
       </div>
-
+    @if($colocation->status == 'active')
       <div class="pt-1 border-t border-white/[0.04]">
         <a href="{{route('colocation.show',$colocation)}}" class="block w-full text-center bg-white/5 text-[#888] hover:text-white border border-white/[0.07] text-sm font-semibold py-2.5 rounded-xl transition-all no-underline">
           Détails de la colocation
         </a>
       </div>
+      @endif
     </div>
     @empty
     <div class="col-span-full py-20 text-center">

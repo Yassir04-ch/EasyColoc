@@ -16,8 +16,7 @@
     <span class="text-xl font-bold text-white">Easy<span class="text-[#00e5a0]">Coloc</span></span>
   </a>
   <div class="flex items-center gap-3">
-    <span class="text-[#888] text-sm">Connecté en tant que <span class="text-white font-semibold">{{ auth()->user()->firstname }}</span></span>
-    <form method="POST" action="{{ route('logout') }}">
+     <form method="POST" action="{{ route('logout') }}">
       @csrf
       <button class="text-sm text-[#888] hover:text-white transition-colors">Déconnexion</button>
     </form>

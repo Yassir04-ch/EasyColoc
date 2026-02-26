@@ -39,10 +39,10 @@ class RegisteredUserController extends Controller
         $user = User::first();
 
         if($user){
-            $request['role'] = 2;
+            $request['role'] = 1;
         }
         else{
-             $request['role'] = 1;
+             $request['role'] = 2;
         }
 
         $user = User::create([

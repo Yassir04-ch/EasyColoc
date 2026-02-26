@@ -29,12 +29,13 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         $user = Auth::user();
-       if ($user->role->name === 'admin') {
+    
+        if ($user->role->name == 'admin') {
         return redirect()->route('admin.index');
        }
-
+        else{
         return redirect()->route('colocation.index');
-
+        }
     }
 
     /**

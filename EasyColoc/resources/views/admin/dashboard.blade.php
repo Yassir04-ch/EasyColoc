@@ -53,8 +53,8 @@
   <div class="border-t border-white/5 pt-4 px-2 flex items-center gap-3">
     <div class="w-9 h-9 rounded-xl bg-[#ff4f91]/20 text-[#ff4f91] flex items-center justify-center font-bold text-sm flex-shrink-0">A</div>
     <div class="flex-1 min-w-0">
-      <p class="text-sm font-semibold truncate">Admin</p>
-      <p class="text-xs text-[#555] truncate">admin@easycoloc.com</p>
+      <p class="text-sm font-semibold truncate">{{auth()->user()->firstname}}</p>
+      <p class="text-xs text-[#555] truncate"> {{auth()->user()->email}}</p>
     </div>
     <a href="login.html" class="text-[#555] hover:text-white text-xs transition-colors no-underline">↩</a>
   </div>
@@ -69,11 +69,13 @@
       <p class="text-[#555] text-xs">Mardi 24 Février 2026</p>
     </div>
     <div class="flex items-center gap-3">
-      <div class="relative">
-        <span class="absolute -top-1 -right-1 w-4 h-4 bg-[#ff4f91] rounded-full text-[9px] font-bold flex items-center justify-center">3</span>
-        <button class="w-9 h-9 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-[#888] hover:text-white transition-colors">🔔</button>
+      <div class="flex items-center gap-3">
+        <form method="POST" action="{{ route('logout') }}">
+          @csrf
+          <button class="text-sm text-[#888] hover:text-white transition-colors">Déconnexion</button>
+        </form>
       </div>
-      <div class="w-9 h-9 rounded-xl bg-[#ff4f91]/20 text-[#ff4f91] flex items-center justify-center font-bold text-sm">A</div>
+      <a href="/profile" ><div class="w-9 h-9 rounded-xl bg-[#ff4f91]/20 text-[#ff4f91] flex items-center justify-center font-bold text-sm">A</div></a>
     </div>
   </header>
 
@@ -110,11 +112,10 @@
 
       <div class="bg-[#141414] border border-white/5 rounded-2xl p-5 hover:-translate-y-0.5 transition-all">
         <div class="flex items-center justify-between mb-3">
-         <p class="text-3xl font-extrabold text-white">{{$usersban->count()}}</p>
           <p class="text-[#555] text-xs font-medium">Utilisateurs bannis</p>
           <div class="w-8 h-8 bg-[#ff4f91]/10 rounded-lg flex items-center justify-center text-sm">🚫</div>
         </div>
-        <p class="text-3xl font-extrabold text-[#ff4f91]">7</p>
+        <p class="text-3xl font-extrabold text-[#ff4f91]">{{$usersban->count()}}</p>
         <p class="text-xs text-[#555] mt-1">→ Aucun ce mois</p>
       </div>
 
