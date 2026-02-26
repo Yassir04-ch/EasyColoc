@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ColocationController;
 use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\ProfileController;
  use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/categorie/{colocation}/create',[CategorieController::class,'create'])->name('categorie.create');
     Route::get('/categorie/{colocation}/store',[CategorieController::class,'create'])->name('categorie.create');
     Route::resource('categorie',CategorieController::class);
+    Route::post('/invitation/{colocation}/store',[InvitationController::class,'store'])->name('invitation.store');
 });
 
 require __DIR__.'/auth.php';

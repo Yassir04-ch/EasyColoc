@@ -19,7 +19,7 @@
   @if(Auth::id() == $owner->id)
   <div class="flex items-center gap-2 flex-wrap justify-end">
 
-    <form action="" method="POST" class="flex items-center gap-2">
+    <form action="{{route('invitation.store',$colocation)}}" method="POST" class="flex items-center gap-2">
       @csrf
       <input type="email" name="email" placeholder="Email du colocataire..."
         class="bg-gray-800 border border-white/10 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-emerald-400/50 transition-all text-white placeholder-gray-600 w-56 hidden md:block"/>
