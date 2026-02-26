@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/categorie/{colocation}/store',[CategorieController::class,'create'])->name('categorie.create');
     Route::resource('categorie',CategorieController::class);
     Route::post('/invitation/{colocation}/store',[InvitationController::class,'store'])->name('invitation.store');
+    Route::get('/invitation/accept/{token}',[InvitationController::class, 'accept'])->name('invitation.accept');
 });
 
 require __DIR__.'/auth.php';

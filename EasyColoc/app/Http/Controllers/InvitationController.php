@@ -12,32 +12,19 @@ use Illuminate\Support\Str;
 
 class InvitationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+   
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request,Colocation $colocation)
     {
         $request->validate([
             'email'=>'required|email',
         ]);
          $token = Str::random();
-        $invitation = Invitation::create([
+         Invitation::create([
         'colocation_id' => $colocation->id,
         'user_id'    => Auth::id(),
         'email'         => $request->email,
@@ -50,35 +37,39 @@ class InvitationController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Invitation $invitation)
+
+    public function accept( $token)
     {
-        //
+        $invitation = Invitation::where('token',$token)->first();
+
+        if(!$invitation){
+          return redirect('/')->with('error', 'Invitation Invalide.');
+        }
+
+        if($invitation->status == 'accepted'){
+          return redirect('/')->with('error', 'Invitation déjà accepted.');
+        }
+
+        if (!Auth::check()) {
+        return redirect('/login');
+        }
+         $colocation = Colocation::with('users')->whereHas('users',function ($query) {
+         $query->where('users.id',Auth::id());
+         })->where('status','active')->first();
+        
+
+         if ($colocation) {
+              return redirect()->route('colocation.index')->with('error','you have arealy colocation active');
+         }
+
+        $invitation->update(['status'=>'accepted']);
+        $invitation->colocation->users()->attach(Auth::id(),[
+            'role'=>'member',
+            'status'=>'active'
+        ]);
+         return redirect('')->route('colocation.index')->with('success', 'Vous avez rejoint la colocation 🎉');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Invitation $invitation)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Invitation $invitation)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Invitation $invitation)
-    {
-        //
-    }
+    
+   
 }
