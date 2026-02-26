@@ -38,7 +38,8 @@ class ColocationController extends Controller
        $query->where('users.id',Auth::id());
          })->where('status','active')->first();
         
-         if ($colocation) {
+         $user = Auth::user();
+         if ($colocation && $user->role->name != 'admin') {
               return redirect()->route('colocation.index')->with('error','you have arealy colocation active');
          }
 
@@ -73,7 +74,7 @@ class ColocationController extends Controller
      */
     public function edit(Colocation $colocation)
     {
-        return view('colocation.detail',compact('colocation'));
+        return view('colocation.edit',compact('colocation'));
     }
 
     /**
@@ -81,6 +82,12 @@ class ColocationController extends Controller
      */
     public function update(Request $request, Colocation $colocation)
     {
+        $validation = $request->validate([
+            'colocation_name' => 'required|string',
+        ]);
+        
+        $colocation->update($validation);
+        return redirect()->route('colocation.index');
         
     }
 

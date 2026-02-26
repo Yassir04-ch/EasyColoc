@@ -47,7 +47,10 @@
         {{ $colocation->colocation_name }}
       </h1>
     </div>
-
+    <div>
+    <a href="{{route('colocation.edit',$colocation)}}"><button type="submit" class="bg-red-500/60 text-white font-bold px-6 py-3 rounded-xl text-sm hover:scale-105 transition-all">Modifier Colocation</button></a>
+    </div>
+      
     <div class="bg-white/5 p-4 rounded-2xl border border-white/10">
       <p class="text-[#555] text-[10px] uppercase font-bold mb-1">Total Membres</p>
       <p class="text-2xl font-black text-[#00e5a0]">{{ $colocation->users->count() }}</p>
