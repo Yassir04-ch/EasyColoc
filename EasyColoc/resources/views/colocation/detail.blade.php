@@ -16,6 +16,19 @@
     <span class="text-xl font-bold text-white">Easy<span class="text-emerald-400">Coloc</span></span>
   </a>
 
+  <a href="{{ route('depense.create', $colocation) }}" 
+       class="bg-emerald-400 text-black font-extrabold px-4 py-2 rounded-xl text-sm hover:scale-105 transition-all flex items-center gap-2 shadow-[0_0_15px_rgba(52,211,153,0.2)] no-underline">
+       <span>+</span> <span class="hidden md:inline">Ajouter Dépense</span>
+    </a>
+
+    <form action="{{ route('colocation.exite', $colocation) }}" method="POST" class="inline">
+      @csrf
+     @method('put')
+      <button type="submit" class="bg-red-500/10 border border-red-500/20 text-red-500 font-bold px-4 py-2 rounded-xl text-sm hover:bg-red-500 hover:text-white transition-all flex items-center gap-2">
+        Quitter
+      </button>
+    </form>
+
   @if(Auth::id() == $owner->id)
   <div class="flex items-center gap-2 flex-wrap justify-end">
 
@@ -180,6 +193,7 @@
         </div>
       </div>
 
+    </div>
     </div>
 
   </div>

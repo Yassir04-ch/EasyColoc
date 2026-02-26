@@ -55,7 +55,7 @@ class ColocationController extends Controller
         $colocation->users()->attach(Auth::id(), [
             'role'      => 'owner',
             'status'    => 'active',
-        ]);
+        ]);   
 
         return redirect()->route('colocation.index');
     }
@@ -92,12 +92,24 @@ class ColocationController extends Controller
         
     }
 
+    public function exite(Colocation $colocation){
+        $user = $colocation->users()->where('user_id',Auth::id())->first();
+        if($user){
+            $user->pivot->update(['status' => 'left']);
+            $reput =  $user->reputation;
+            $reput = $reput-1;
+            $user->update(['reputation'=>$reput]);
+        }
+        return redirect()->route('colocation.index');
+    }
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Colocation $colocation)
     {
          $colocation->update(['status' => 'cancelled']);
+          $colocation->users->pivot->update(['status' => 'left']);
          return redirect()->route('colocation.index');
     }
 }

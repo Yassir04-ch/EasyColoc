@@ -63,7 +63,7 @@
           <p class="text-[#555] text-xs mt-0.5">Membres</p>
         </div>
       </div>
-    @if($colocation->status == 'active')
+    @if($colocation->status == 'active' )
       <div class="pt-1 border-t border-white/[0.04]">
         <a href="{{route('colocation.show',$colocation)}}" class="block w-full text-center bg-white/5 text-[#888] hover:text-white border border-white/[0.07] text-sm font-semibold py-2.5 rounded-xl transition-all no-underline">
           Détails de la colocation

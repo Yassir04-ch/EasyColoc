@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function () {
 
 
  Route::middleware('CheckBanned')->group(function(){
+    Route::put('/colocation/{colocation}/exite',[ColocationController::class,'exite'])->name('colocation.exite');
     Route::resource('colocation',ColocationController::class);
     Route::put('/admin/{user}/bannir',[AdminController::class,'bannir'])->name('admin.bannir');
     Route::put('/admin/{user}/debannir',[AdminController::class,'debannir'])->name('admin.debannir');
