@@ -33,13 +33,13 @@
     <a href="" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[#888] hover:text-white hover:bg-white/5 text-sm no-underline transition-all">
       <span>📊</span> Dashboard
     </a>
-    <a href="" class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-[#00e5a0]/10 text-[#00e5a0] font-semibold text-sm no-underline">
-      <span>👥</span> Utilisateurs
+    <a href="{{route('admin.index')}}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[#888] hover:text-white hover:bg-white/5 text-sm no-underline transition-all">
+      <span>📊</span> Utilisateurs
     </a>
-    <a href="{{route('admin.colocations')}}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[#888] hover:text-white hover:bg-white/5 text-sm no-underline transition-all">
+    <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-[#00e5a0]/10 text-[#00e5a0] font-semibold text-sm no-underline">
       <span>🏠</span> Colocations
     </a>
-
+    
   </nav>
 
   <!-- User info bottom -->
@@ -120,37 +120,20 @@
       <!-- ── DERNIERS UTILISATEURS ── -->
       <div id="users" class="bg-[#141414] border border-white/5 rounded-2xl p-6">
         <div class="flex items-center justify-between mb-5">
-          <h2 class="font-bold text-base flex items-center gap-2">👥 utilisateurs</h2>
+          <h2 class="font-bold text-base flex items-center gap-2">👥All Colocations</h2>
         </div>
 
         <div class="flex flex-col gap-1">
 
           <!-- User row -->
-          @foreach($users as $user)
+          @foreach($colocations as $colocation)
 
           <div class="flex items-center justify-between py-2.5 border-b border-white/[0.04]">
             <div class="flex items-center gap-3">
               <div class="w-8 h-8 rounded-lg bg-[#4f8fff]/20 text-[#4f8fff] flex items-center justify-center text-xs font-bold">Y</div>
               <div>
-                <p class="text-sm font-medium">{{$user->firstname}} {{$user->lastname}}</p>
-                <p class="text-xs text-[#555]">{{$user->email}}</p>
+                <p class="text-sm font-medium">{{$colocation->colocation_name}}</p>
               </div>
-            </div>
-            <div class="flex items-center gap-2">
-              <span class="bg-[#00e5a0]/10 text-[#00e5a0] text-xs px-2 py-0.5 rounded-full">{{$user->status_account}}</span>
-              @if($user->status_account == 'actif')
-              <form method="POST" action="{{ route('admin.bannir', $user) }}">
-               @csrf
-               @method('put')
-                <button type="submit" class="text-[#555] hover:text-[#ff4f91] text-xs transition-colors px-2 py-1 rounded-lg hover:bg-[#ff4f91]/10">Bannir</button>
-              </form>  
-              @else
-              <form method="POST" action="{{ route('admin.debannir', $user) }}">
-               @csrf
-               @method('put')
-                <button type="submit" class="text-[#555] hover:text-[#ff4f91] text-xs transition-colors px-2 py-1 rounded-lg hover:bg-[#ff4f91]/10">Débannir</button>
-              </form>
-              @endif
             </div>
           </div>
           @endforeach

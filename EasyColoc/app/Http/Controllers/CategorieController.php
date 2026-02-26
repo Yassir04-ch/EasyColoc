@@ -29,11 +29,12 @@ class CategorieController extends Controller
      */
     public function store(Request $request)
     {
+
         $validation = $request->validate([
             'categorie_name'=>'required|string',
             'colocation_id'=>'required'
         ]);
-
+         
         Categorie::create($validation);
         return redirect()->route('colocation.index');
     }
@@ -74,7 +75,6 @@ class CategorieController extends Controller
     public function destroy(Categorie $categorie)
     {
         $categorie->delete();
-
-        return redirect()->route('categorie.index');
+        return back();
     }
 }

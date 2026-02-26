@@ -25,7 +25,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('colocation',ColocationController::class);
     Route::put('/admin/{user}/bannir',[AdminController::class,'bannir'])->name('admin.bannir');
     Route::put('/admin/{user}/debannir',[AdminController::class,'debannir'])->name('admin.debannir');
+    Route::get('/admin/colocations',[AdminController::class,'colocations'])->name('admin.colocations');
     Route::get('/admin',[AdminController::class,'index'])->name('admin.index');
+    Route::get('/categorie/{colocation}/create',[CategorieController::class,'create'])->name('categorie.create');
+    Route::get('/categorie/{colocation}/store',[CategorieController::class,'create'])->name('categorie.create');
     Route::resource('categorie',CategorieController::class);
 });
 

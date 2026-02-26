@@ -29,15 +29,6 @@
 
   <div class="relative z-10 w-full max-w-lg">
 
-    <!-- Breadcrumb -->
-    <div class="flex items-center gap-2 text-sm text-gray-600 mb-6">
-      <a href="{{route('colocation.index')}}" class="hover:text-white transition-colors no-underline">Mes colocations</a>
-      <span>/</span>
-      <a href="show.html" class="hover:text-white transition-colors no-underline">Appart Guéliz</a>
-      <span>/</span>
-      <span class="text-white">Nouvelle catégorie</span>
-    </div>
-
     <!-- CARD -->
     <div class="bg-gray-900 border border-white/[0.08] rounded-3xl p-8 md:p-10">
 

@@ -65,6 +65,7 @@ class ColocationController extends Controller
      */
     public function show(Colocation $colocation)
     {
+
         $owner = $colocation->users->where('pivot.role', 'owner')->first();
         return view('colocation.detail',compact('colocation','owner'));
     }
