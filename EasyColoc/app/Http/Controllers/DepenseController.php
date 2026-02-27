@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Colocation;
 use App\Models\Depense;
+use App\Models\Paiement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,13 +43,23 @@ class DepenseController extends Controller
         $validation['user_id'] = Auth::id();
         $validation['colocation_id'] = $colocation->id;
 
-        Depense::create($validation);
+         $depense =  Depense::create($validation);
+
+        $mambers = $colocation->users()->wherePivot('status','active')->where('users.id','!=',Auth::id())->get();
+        $amount = $depense->price / ($mambers->count() + 1);
+
+        foreach($mambers as $mamber){
+         Paiement::create([
+            'depense_id'   => $depense->id,
+            'from_user_id' => $mamber->id,
+            'to_user_id'   => Auth::id(),
+            'amount'       => $amount,
+            'paid_at'      => null,
+            ]);
+        }
+
        return redirect()->route('depense.index', $colocation);
     }
-
-
-
-    public function
    
 
     /**

@@ -54,7 +54,7 @@
       <h1 class="text-base font-bold">Dépenses</h1>
       <p class="text-gray-600 text-xs">{{ $colocation->colocation_name }}</p>
     </div>
-    <a href=" "
+    <a href="{{route('depense.create',$colocation)}}"
       class="bg-emerald-400 text-black font-bold px-4 py-2 rounded-xl text-sm hover:opacity-90 transition-opacity glow no-underline flex items-center gap-2">
       + Ajouter
     </a>
@@ -156,7 +156,8 @@
                   </div>
                 </td>
 
-                <!-- Status payé -->
+
+         
                 <td class="px-6 py-4 text-center"> 
                     <span class="bg-red-500/10 text-red-400 border border-red-500/20 text-xs font-bold px-3 py-1 rounded-full">
                       En attente
