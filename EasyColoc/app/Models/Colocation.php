@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Colocation extends Model
 {
-    protected $fillable = ['colocation_name','status'];
+    protected $fillable = ['colocation_name','description','status'];
 
     public function users(){
         return $this->belongsToMany(User::class,'user_colocation')->withPivot(['role', 'status']);

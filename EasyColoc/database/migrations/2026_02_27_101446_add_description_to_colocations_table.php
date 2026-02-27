@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('invitations', function (Blueprint $table) {
-            $table->string('token')->unique()->after('email');
+        Schema::table('colocations', function (Blueprint $table) {
+            $table->string('description')->after('colocation_name');
+
         });
     }
 
@@ -21,9 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('invitations', function (Blueprint $table) {
-                 $table->dropColumn('token');
-
+        Schema::table('colocations', function (Blueprint $table) {
+            $table->dropColumn('description');
         });
     }
 };

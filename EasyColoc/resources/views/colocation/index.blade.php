@@ -41,7 +41,7 @@
     @endif
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 
-    @forelse($colocations as $colocation)
+    @foreach($colocations as $colocation)
     <div class="bg-[#141414] border border-white/[0.07] hover:border-[#00e5a0]/30 hover:-translate-y-1 transition-all duration-300 rounded-2xl p-6 flex flex-col gap-4 {{ $colocation->status == 'annulé' ? 'opacity-60' : '' }}">
       
       <div class="flex items-start justify-between">
@@ -62,20 +62,19 @@
           <p class="text-base font-bold text-white">{{ $colocation->users->count() }}</p>
           <p class="text-[#555] text-xs mt-0.5">Membres</p>
         </div>
+         <div>
+            <p class="font-bold text-base">{{ $colocation->description }}</p>
+        </div>
       </div>
-    @if($colocation->status == 'active' )
+      @if($colocation->status == 'active' )
       <div class="pt-1 border-t border-white/[0.04]">
         <a href="{{route('colocation.show',$colocation)}}" class="block w-full text-center bg-white/5 text-[#888] hover:text-white border border-white/[0.07] text-sm font-semibold py-2.5 rounded-xl transition-all no-underline">
           Détails de la colocation
         </a>
       </div>
       @endif
-    </div>
-    @empty
-    <div class="col-span-full py-20 text-center">
-        <p class="text-[#555]">Aucune colocation n'est disponible pour le moment.</p>
-    </div>
-    @endforelse
+      </div>
+    @endforeach
 
   </div>
 </main>

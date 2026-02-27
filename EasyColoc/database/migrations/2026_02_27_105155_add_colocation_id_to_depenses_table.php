@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('invitations', function (Blueprint $table) {
-            $table->string('token')->unique()->after('email');
+        Schema::table('depenses', function (Blueprint $table) {
+            //
         });
     }
 
@@ -21,9 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('invitations', function (Blueprint $table) {
-                 $table->dropColumn('token');
-
+        Schema::table('depenses', function (Blueprint $table) {
+            //
         });
     }
 };

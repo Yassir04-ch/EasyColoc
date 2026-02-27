@@ -22,11 +22,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-    Route::get('/depense/{colocation}/create',[DepenseController::class,'create'])->name('depense.create');
-    Route::resource('depense',DepenseController::class);
 
 
- Route::middleware('CheckBanned')->group(function(){
+Route::middleware('CheckBanned')->group(function(){
     Route::put('/colocation/{colocation}/exite',[ColocationController::class,'exite'])->name('colocation.exite');
     Route::resource('colocation',ColocationController::class);
     Route::put('/admin/{user}/bannir',[AdminController::class,'bannir'])->name('admin.bannir');
@@ -38,6 +36,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('categorie',CategorieController::class);
     Route::post('/invitation/{colocation}/store',[InvitationController::class,'store'])->name('invitation.store');
     Route::get('/invitation/accept/{token}',[InvitationController::class, 'accept'])->name('invitation.accept');
-});
+    Route::get('/depense/{colocation}/create',[DepenseController::class,'create'])->name('depense.create');
+    Route::post('/depense/{colocation}/store',[DepenseController::class,'store'])->name('depense.store');
+    Route::resource('depense',DepenseController::class);
+    });
 
 require __DIR__.'/auth.php';

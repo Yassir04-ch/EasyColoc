@@ -67,7 +67,7 @@ class InvitationController extends Controller
             'role'=>'member',
             'status'=>'active'
         ]);
-         return redirect('')->route('colocation.index')->with('success', 'Vous avez rejoint la colocation 🎉');
+         return redirect()->route('colocation.index')->with('success', 'Vous avez rejoint la colocation ');
     }
 
     

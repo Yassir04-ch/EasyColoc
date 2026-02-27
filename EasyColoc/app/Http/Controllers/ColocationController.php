@@ -45,7 +45,8 @@ class ColocationController extends Controller
 
 
         $validation = $request->validate([
-            'colocation_name' => 'required|string'
+            'colocation_name' => 'required|string',
+            'description' => 'required|string'
         ]);
 
         $validation['status'] = 'active';
@@ -85,6 +86,7 @@ class ColocationController extends Controller
     {
         $validation = $request->validate([
             'colocation_name' => 'required|string',
+            'description' => 'required|string'
         ]);
         
         $colocation->update($validation);

@@ -62,8 +62,13 @@
         <div class="flex flex-col gap-1.5">
           <label class="text-sm font-medium text-[#aaa]">Nom de la colocation</label>
           <input type="text" name="colocation_name" placeholder="Ex: Appart Guéliz, Villa Californie..."
-            class="bg-[#1a1a1a] border border-white/[0.08] focus:border-[#00e5a0]/50 focus:outline-none text-white text-sm px-4 py-3 rounded-xl placeholder-[#444] transition-colors"
-          />
+            class="bg-[#1a1a1a] border border-white/[0.08] focus:border-[#00e5a0]/50 focus:outline-none text-white text-sm px-4 py-3 rounded-xl placeholder-[#444] transition-colors" />
+        </div>
+        
+        <div class="flex flex-col gap-1.5">
+          <label class="text-sm font-medium text-[#aaa]">Description</label>
+          <input type="text" name="description" placeholder="Ex: colocation pour aprenent Youcode"
+            class="bg-[#1a1a1a] border border-white/[0.08] focus:border-[#00e5a0]/50 focus:outline-none text-white text-sm px-4 py-3 rounded-xl placeholder-[#444] transition-colors" />
         </div>
 
         <!-- Info box -->

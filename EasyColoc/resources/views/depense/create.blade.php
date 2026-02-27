@@ -52,7 +52,7 @@
                     </div>
 
                     <div>
-                        <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2 ml-1">Note (Optionnel)</label>
+                        <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2 ml-1">Date</label>
                          <input type="date"  name="date" required
                                 class="w-full bg-gray-800/50 border border-white/10 rounded-2xl px-5 py-4 text-white placeholder-gray-600 focus:outline-none focus:border-emerald-400/50 transition-all">
                     </div>

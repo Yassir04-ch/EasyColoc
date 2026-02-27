@@ -47,18 +47,20 @@
       </div>
 
 
-      <!-- Form -->
       <form action="{{ route('colocation.update',$colocation) }}" method="POST" class="flex flex-col gap-5">
         @csrf
         @method('put')
-        <!-- Nom colocation -->
         <div class="flex flex-col gap-1.5">
           <label class="text-sm font-medium text-[#aaa]">Nom de la colocation</label>
           <input type="text" name="colocation_name" value="{{$colocation->colocation_name}}"
             class="bg-[#1a1a1a] border border-white/[0.08] focus:border-[#00e5a0]/50 focus:outline-none text-white text-sm px-4 py-3 rounded-xl placeholder-[#444] transition-colors"/>
         </div>
+        <div class="flex flex-col gap-1.5">
+          <label class="text-sm font-medium text-[#aaa]">Description</label>
+          <input type="text" name="description" value="{{$colocation->description}}"
+            class="bg-[#1a1a1a] border border-white/[0.08] focus:border-[#00e5a0]/50 focus:outline-none text-white text-sm px-4 py-3 rounded-xl placeholder-[#444] transition-colors"/>
+        </div>
 
-        <!-- Buttons -->
         <div class="flex gap-3 mt-1">
           <a href="{{ route('colocation.index') }}"
             class="flex-1 text-center border border-white/10 text-[#888] hover:text-white hover:border-white/20 font-medium py-3 rounded-xl text-sm transition-all no-underline">

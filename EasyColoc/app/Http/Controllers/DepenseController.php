@@ -29,17 +29,17 @@ class DepenseController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request,Colocation $colocation)
     {
         $validation = $request->validate([
             'titre' => 'required|string',
             'price' => 'required',
-            'date' => 'required',
-            'colocation_id'=> 'required',
+            'date' => 'required|date',
             'categorie_id'=> 'required',
         ]);
         
         $validation['user_id'] = Auth::id();
+        $validation['colocation_id'] = $colocation->id;
 
         Depense::create($validation);
         return redirect()->route('depense.index');
