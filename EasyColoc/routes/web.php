@@ -26,19 +26,21 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('CheckBanned')->group(function(){
     Route::put('/colocation/{colocation}/exite',[ColocationController::class,'exite'])->name('colocation.exite');
+    Route::get('/colocation/{colocation}/show',[ColocationController::class,'show'])->name('colocation.show');
     Route::resource('colocation',ColocationController::class);
     Route::put('/admin/{user}/bannir',[AdminController::class,'bannir'])->name('admin.bannir');
     Route::put('/admin/{user}/debannir',[AdminController::class,'debannir'])->name('admin.debannir');
     Route::get('/admin/colocations',[AdminController::class,'colocations'])->name('admin.colocations');
     Route::get('/admin',[AdminController::class,'index'])->name('admin.index');
     Route::get('/categorie/{colocation}/create',[CategorieController::class,'create'])->name('categorie.create');
-    Route::get('/categorie/{colocation}/store',[CategorieController::class,'create'])->name('categorie.create');
+    Route::post('/categorie/{colocation}/store',[CategorieController::class,'create'])->name('categorie.store');
     Route::resource('categorie',CategorieController::class);
     Route::post('/invitation/{colocation}/store',[InvitationController::class,'store'])->name('invitation.store');
     Route::get('/invitation/accept/{token}',[InvitationController::class, 'accept'])->name('invitation.accept');
     Route::get('/depense/{colocation}/create',[DepenseController::class,'create'])->name('depense.create');
     Route::post('/depense/{colocation}/store',[DepenseController::class,'store'])->name('depense.store');
-    Route::resource('depense',DepenseController::class);
+    Route::get('/depense/{colocation}', [DepenseController::class, 'index'])->name('depense.index');
+
     });
 
 require __DIR__.'/auth.php';

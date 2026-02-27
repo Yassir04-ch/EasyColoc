@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('depenses', function (Blueprint $table) {
-            //
+            $table->foreignId('colocation_id')->constrained('colocations')->onDelete('cascade');
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('depenses', function (Blueprint $table) {
-            //
+            $table->dropColumn('colocation_id');
         });
     }
 };

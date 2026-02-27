@@ -28,10 +28,10 @@
 
   <nav class="flex flex-col gap-0.5 flex-1">
     <p class="text-gray-700 text-xs font-bold uppercase tracking-widest px-3 mb-2">Navigation</p>
-    <a href="#" class="sidebar-link active flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium no-underline">
+    <a href="" class="sidebar-link active flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium no-underline">
       <span>📊</span> Vue d'ensemble
     </a>
-    <a href="#depenses" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-500 no-underline">
+    <a href="{{route('depense.index',$colocation)}}" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-500 no-underline">
       <span>💸</span> Dépenses
     </a>
 
@@ -41,15 +41,15 @@
       class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-500 no-underline">
       <span>+</span> Ajouter catégorie
     </a>
-    <a href="{{ route('depense.create', $colocation) }}"
-      class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-500 no-underline">
-      <span>+</span> Ajouter dépense
-    </a>
     <a href="{{ route('colocation.edit', $colocation) }}"
       class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-500 no-underline">
       <span>✏️</span> Modifier
     </a>
     @endif
+    <a href="{{ route('depense.create', $colocation) }}"
+      class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-500 no-underline">
+      <span>+</span> Ajouter dépense
+    </a>
   </nav>
 
   <div class="border-t border-white/5 pt-4 flex flex-col gap-1">

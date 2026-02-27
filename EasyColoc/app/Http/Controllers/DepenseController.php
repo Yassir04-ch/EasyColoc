@@ -13,9 +13,10 @@ class DepenseController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request,Colocation $colocation)
     {
-        
+        $depenses = Depense::with('user')->where('colocation_id',$colocation->id)->get();
+        return view('depense.index',compact('depenses','colocation'));
     }
 
     /**
@@ -42,7 +43,7 @@ class DepenseController extends Controller
         $validation['colocation_id'] = $colocation->id;
 
         Depense::create($validation);
-        return redirect()->route('depense.index');
+       return redirect()->route('depense.index', $colocation);
     }
 
     /**
@@ -58,7 +59,7 @@ class DepenseController extends Controller
      */
     public function edit(Depense $depense)
     {
-        return view('depense.edit',compact('depence'));
+        return view('depense.edit',compact('depense'));
     }
 
     /**
