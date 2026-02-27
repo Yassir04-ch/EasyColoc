@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categorie;
 use App\Models\Colocation;
 use App\Models\Depense;
 use Illuminate\Http\Request;
@@ -15,8 +14,9 @@ class DepenseController extends Controller
      */
     public function index(Request $request,Colocation $colocation)
     {
+        $users = $colocation->users()->wherePivot('status', 'active')->get();
         $depenses = Depense::with('user')->where('colocation_id',$colocation->id)->get();
-        return view('depense.index',compact('depenses','colocation'));
+        return view('depense.index',compact('depenses','colocation','users'));
     }
 
     /**
@@ -46,21 +46,10 @@ class DepenseController extends Controller
        return redirect()->route('depense.index', $colocation);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Depense $depense)
-    {
-        return view('depense.show',compact('depense'));
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Depense $depense)
-    {
-        return view('depense.edit',compact('depense'));
-    }
+
+    public function
+   
 
     /**
      * Update the specified resource in storage.

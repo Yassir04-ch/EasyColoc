@@ -152,7 +152,7 @@
                 <!-- Montant -->
                 <td class="px-6 py-4">
                   <div>
-                    <p class="font-bold text-emerald-400 text-sm">{{ number_format($depense->price, 2) }} DH</p>
+                    <p class="font-bold text-emerald-400 text-sm">{{ number_format($depense->price /$users->count(),2) }} DH</p>
                   </div>
                 </td>
 
