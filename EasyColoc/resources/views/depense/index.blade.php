@@ -88,13 +88,34 @@
 
     <!-- ── TABLE DEPENSES ── -->
     <div class="card">
+    
       <div class="flex items-center justify-between px-6 py-4 border-b border-white/5">
         <h2 class="font-bold text-sm flex items-center gap-2">
           💸 Liste des dépenses
           <span class="bg-white/5 text-gray-500 text-xs px-2 py-0.5 rounded-full">{{ $depenses->count() }}</span>
         </h2>
       </div>
-
+         <form method="GET" action="{{ route('depense.index', $colocation) }}" class="flex items-center gap-2">
+            <select name="mois" class="bg-gray-800 border border-white/10 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-emerald-400/50 transition-all">
+              <option value="">Tous les mois</option>
+              <option value="01" >Janvier</option>
+              <option value="02" >Février</option>
+              <option value="03" >Mars</option>
+              <option value="04" >Avril</option>
+              <option value="05" >Mai</option>
+              <option value="06" >Juin</option>
+              <option value="07" >Juillet</option>
+              <option value="08" >Août</option>
+              <option value="09" >Septembre</option>
+              <option value="10" >Octobre</option>
+              <option value="11" >Novembre</option>
+              <option value="12" >Décembre</option>
+            </select>
+            <button type="submit" class="bg-emerald-400 text-black font-bold px-4 py-2 rounded-xl text-sm hover:opacity-90 transition-opacity glow no-underline flex items-center gap-2">
+              Filter
+           </button>   
+             
+          </form>
       
         <div class="overflow-x-auto">
           <table class="w-full text-left">

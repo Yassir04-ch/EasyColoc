@@ -29,6 +29,11 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         $user = Auth::user();
+
+        if($user->status_account == 'banni'){
+            Auth::logout();
+        return redirect()->route('login')->with('error', 'Votre compte a été banni');
+        }
     
         if ($user->role->name == 'admin') {
         return redirect()->route('admin.index');

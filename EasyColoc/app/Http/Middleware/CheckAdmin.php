@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckBanned
+class CheckAdmin
 {
     /**
      * Handle an incoming request.
@@ -16,13 +16,12 @@ class CheckBanned
      */
     public function handle(Request $request, Closure $next): Response
     {
+     
+        if(Auth::user()->role->name != 'admin'){
+            abort(403);
+        }
 
-      if(Auth::check() && Auth::user()->status_account == 'banni'){
-         Auth::logout();
-         return redirect()->route('login')->with('error','Votre compte a été banni');
-
-      }  
         return $next($request);
-
     }
+
 }

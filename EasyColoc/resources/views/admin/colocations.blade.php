@@ -39,6 +39,9 @@
     <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-[#00e5a0]/10 text-[#00e5a0] font-semibold text-sm no-underline">
       <span>🏠</span> Colocations
     </a>
+    <a href="{{route('colocation.index')}}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[#888] hover:text-white hover:bg-white/5 text-sm no-underline transition-all">
+      My Colocations
+    </a>
     
   </nav>
 

@@ -16,10 +16,18 @@ class DepenseController extends Controller
      */
     public function index(Request $request,Colocation $colocation)
     {
-        $users = $colocation->users()->wherePivot('status', 'active')->get();
-        $depenses = Depense::with(['user', 'paiement' => function($query) {
-        $query->where('from_user_id', Auth::id());}])->where('colocation_id', $colocation->id)->get();
-        return view('depense.index',compact('depenses','colocation','users'));
+         $users = $colocation->users()->wherePivot('status', 'active')->get();
+         $depenses = Depense::with(['user', 'paiement' => function($query) {
+         $query->where('from_user_id', Auth::id());}])->where('colocation_id', $colocation->id);
+
+        if($request->filled('mois')){
+             $depenses = $depenses->whereMonth('date', $request->mois)->get();
+        }
+        else{
+            $depenses = $depenses->get();  
+        }
+            return view('depense.index',compact('depenses','colocation','users'));
+
     }
 
     /**

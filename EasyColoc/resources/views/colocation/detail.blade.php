@@ -44,7 +44,7 @@
     </a>
     <a href="{{ route('colocation.edit', $colocation) }}"
       class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-500 no-underline">
-      <span>✏️</span> Modifier
+      <span>✏️</span> Modifier Colocation
     </a>
     @endif
     <a href="{{ route('depense.create', $colocation) }}"
@@ -145,7 +145,7 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+    <div class="grid grid-cols-2 lg:grid-cols-1 gap-6 mb-6">
 
       <!-- MEMBRES -->
       <div id="membres" class="card">
@@ -160,6 +160,7 @@
             <tr>
               <th class="px-6 py-3 text-gray-600 text-xs uppercase font-bold">Collaborateur</th>
               <th class="px-6 py-3 text-gray-600 text-xs uppercase font-bold">Rôle</th>
+              <th class="px-6 py-3 text-gray-600 text-xs uppercase font-bold">reputation</th>
               <th class="px-6 py-3 text-gray-600 text-xs uppercase font-bold text-right">État</th>
              </tr>
           </thead>
@@ -178,6 +179,11 @@
                 <span class="text-xs px-2 py-1 rounded-lg border font-bold uppercase
                   {{ $user->pivot->role == 'owner' ? 'text-yellow-300 border-yellow-300/20 bg-yellow-300/5' : 'text-gray-500 border-white/10' }}">
                   {{ $user->pivot->role }}
+                </span>
+              </td>
+               <td class="px-6 py-4">
+                <span class="text-xs px-2 py-1 rounded-lg border font-bold uppercase 'text-gray-500 border-white/10' }}">
+                  {{ $user->reputation }}
                 </span>
               </td>
               <td class="px-6 py-4 text-right">
@@ -233,7 +239,7 @@
                 <span class="font-medium text-sm text-white">{{ $categorie->categorie_name }}</span>
               </td>
               <td class="px-6 py-4">
-                <span class="text-xs text-gray-600">{{ $categorie->created_at->format('d/m/Y') }}</span>
+                <span class="text-xs text-gray-600">{{ $categorie->created_at }}</span>
               </td>
               @if(Auth::id() == $owner->id)
               <td class="px-6 py-4 text-right">

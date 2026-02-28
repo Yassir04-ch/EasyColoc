@@ -6,6 +6,11 @@
         @csrf
 
         <!-- Email Address -->
+         @if(session('error'))
+        <div class="error-msg" style="margin-bottom:20px;">
+            <p class="text-white text-sm font-medium">{{ session('error') }}</p>
+        </div>
+      @endif
         <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />

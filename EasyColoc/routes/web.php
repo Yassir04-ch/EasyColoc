@@ -13,9 +13,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -25,14 +22,10 @@ Route::middleware('auth')->group(function () {
 
 
 
-Route::middleware('CheckBanned')->group(function(){
+Route::middleware(['auth','CheckBanned'])->group(function(){
     Route::put('/colocation/{colocation}/exite',[ColocationController::class,'exite'])->name('colocation.exite');
     Route::get('/colocation/{colocation}/show',[ColocationController::class,'show'])->name('colocation.show');
     Route::resource('colocation',ColocationController::class);
-    Route::put('/admin/{user}/bannir',[AdminController::class,'bannir'])->name('admin.bannir');
-    Route::put('/admin/{user}/debannir',[AdminController::class,'debannir'])->name('admin.debannir');
-    Route::get('/admin/colocations',[AdminController::class,'colocations'])->name('admin.colocations');
-    Route::get('/admin',[AdminController::class,'index'])->name('admin.index');
     Route::get('/categorie/{colocation}/create',[CategorieController::class,'create'])->name('categorie.create');
     Route::post('/categorie/{colocation}/store',[CategorieController::class,'store'])->name('categorie.store');
     Route::put('/categorie/{categorie}/update',[CategorieController::class,'update'])->name('categorie.update');
@@ -46,5 +39,13 @@ Route::middleware('CheckBanned')->group(function(){
     Route::put('/colocation/{colocation}/removemember',[ColocationController::class,'removemember'])->name('colocation.removemember');
 
     });
+
+
+Route::middleware(['auth','CheckBanned','CheckAdmin'])->group(function(){
+    Route::put('/admin/{user}/bannir',[AdminController::class,'bannir'])->name('admin.bannir');
+    Route::put('/admin/{user}/debannir',[AdminController::class,'debannir'])->name('admin.debannir');
+    Route::get('/admin/colocations',[AdminController::class,'colocations'])->name('admin.colocations');
+    Route::get('/admin',[AdminController::class,'index'])->name('admin.index');
+});
 
 require __DIR__.'/auth.php';
