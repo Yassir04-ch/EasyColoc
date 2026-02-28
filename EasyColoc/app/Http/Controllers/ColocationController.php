@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreColocationRequest;
+use App\Http\Requests\UpdateColocationRequest;
 use App\Models\Colocation;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -32,7 +34,7 @@ class ColocationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-  public function store(Request $request)
+  public function store(StoreColocationRequest $request)
   {
 
        $colocation = Colocation::with('users')->whereHas('users',function ($query) {
@@ -45,10 +47,7 @@ class ColocationController extends Controller
          }
 
 
-        $validation = $request->validate([
-            'colocation_name' => 'required|string',
-            'description' => 'required|string'
-        ]);
+        $validation = $request->validated();
 
         $validation['status'] = 'active';
 
@@ -83,12 +82,9 @@ class ColocationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Colocation $colocation)
+    public function update(UpdateColocationRequest $request, Colocation $colocation)
     {
-        $validation = $request->validate([
-            'colocation_name' => 'required|string',
-            'description' => 'required|string'
-        ]);
+        $validation = $request->validated();
         
         $colocation->update($validation);
         return redirect()->route('colocation.index');

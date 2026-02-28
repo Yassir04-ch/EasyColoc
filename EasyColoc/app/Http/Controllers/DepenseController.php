@@ -40,7 +40,7 @@ class DepenseController extends Controller
         $validation['user_id'] = Auth::id();
         $validation['colocation_id'] = $colocation->id;
 
-         $depense =  Depense::create($validation);
+        $depense =  Depense::create($validation);
 
         $mambers = $colocation->users()->wherePivot('status','active')->where('users.id','!=',Auth::id())->get();
         $amount = $depense->price / ($mambers->count() + 1);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCategorieRequest;
 use App\Models\Categorie;
 use App\Models\Colocation;
 use Illuminate\Http\Request;
@@ -27,12 +28,10 @@ class CategorieController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request , Colocation $colocation)
+    public function store(StoreCategorieRequest $request , Colocation $colocation)
     {
 
-        $validation = $request->validate([
-            'categorie_name'=>'required|string',
-        ]);
+        $validation = $request->validated();
         $validation['colocation_id'] = $colocation->id;
          
         Categorie::create($validation);
