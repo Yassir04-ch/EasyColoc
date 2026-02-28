@@ -5,6 +5,7 @@ use App\Http\Controllers\ColocationController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\DepenseController;
 use App\Http\Controllers\InvitationController;
+use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\ProfileController;
  use Illuminate\Support\Facades\Route;
 
@@ -40,6 +41,7 @@ Route::middleware('CheckBanned')->group(function(){
     Route::get('/depense/{colocation}/create',[DepenseController::class,'create'])->name('depense.create');
     Route::post('/depense/{colocation}/store',[DepenseController::class,'store'])->name('depense.store');
     Route::get('/depense/{colocation}', [DepenseController::class, 'index'])->name('depense.index');
+    Route::put('/paiement/{depense}/paye',[PaiementController::class,'paye'])->name('paiement.paye');
 
     });
 

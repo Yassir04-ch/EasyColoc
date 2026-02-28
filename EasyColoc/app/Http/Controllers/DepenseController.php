@@ -16,7 +16,8 @@ class DepenseController extends Controller
     public function index(Request $request,Colocation $colocation)
     {
         $users = $colocation->users()->wherePivot('status', 'active')->get();
-        $depenses = Depense::with('user')->where('colocation_id',$colocation->id)->get();
+        $depenses = Depense::with(['user', 'paiement' => function($query) {
+        $query->where('from_user_id', Auth::id());}])->where('colocation_id', $colocation->id)->get();
         return view('depense.index',compact('depenses','colocation','users'));
     }
 
@@ -54,9 +55,16 @@ class DepenseController extends Controller
             'from_user_id' => $mamber->id,
             'to_user_id'   => Auth::id(),
             'amount'       => $amount,
-            'paid_at'      => null,
             ]);
         }
+
+        Paiement::create([
+            'depense_id'   => $depense->id,
+            'from_user_id' => Auth::id(),
+            'to_user_id'   => Auth::id(),
+            'amount'       => $amount,
+            'is_paid'      => true,
+        ]);
 
        return redirect()->route('depense.index', $colocation);
     }

@@ -24,17 +24,13 @@
 
   <nav class="flex flex-col gap-0.5 flex-1">
     <p class="text-gray-700 text-xs font-bold uppercase tracking-widest px-3 mb-2">Navigation</p>
-    <a href=""
+    <a href="{{ route('colocation.index') }}"
       class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-500 no-underline">
       <span>📊</span> Vue d'ensemble
     </a>
     <a href=""
       class="sidebar-link active flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium no-underline">
       <span>💸</span> Dépenses
-    </a>
-    <a href=""
-      class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-500 no-underline">
-      <span>🗂️</span> Catégories
     </a>
   </nav>
 
@@ -157,26 +153,31 @@
                 </td>
 
 
-         
-                <td class="px-6 py-4 text-center"> 
-                    <span class="bg-red-500/10 text-red-400 border border-red-500/20 text-xs font-bold px-3 py-1 rounded-full">
+                <td class="px-6 py-4 text-center">
+                  @if($depense->paiement->where('is_paid', 0)->count() > 0)
+                      <span class="bg-red-500/10 text-red-400 border border-red-500/20 text-xs font-bold px-3 py-1 rounded-full">
                       En attente
                     </span>
-                 </td>
-
+                  @else
+                    <span class="bg-emerald-400/10 text-emerald-400 border border-emerald-400/20 text-xs font-bold px-3 py-1 rounded-full">
+                       Payé
+                    </span>
+                  @endif
+                </td>
                 <!-- Action -->
                 <td class="px-6 py-4 text-right">
+                  @if($depense->paiement->where('is_paid', 0)->count() > 0)
                   <div class="inline-flex items-center gap-1">
-
-                        <form method="POST" action="">
+                    <form action="{{route('paiement.paye',$depense)}}" method="POST" >
                         @csrf
-                        @method('patch')
+                        @method('put')
                         <button type="submit"
                           class="bg-emerald-400/10 border border-emerald-400/20 text-emerald-400 hover:bg-emerald-400 hover:text-black text-xs font-bold px-3 py-1.5 rounded-lg transition-all">
                           💳 Payer
                         </button>
                       </form>
                   </div>
+                  @endif
                 </td>
 
               </tr>

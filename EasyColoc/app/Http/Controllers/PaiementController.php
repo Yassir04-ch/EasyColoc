@@ -2,64 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Depense;
 use App\Models\Paiement;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PaiementController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
+    
+public function paye(Depense $depense){
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+   $paiement = $depense->paiement()->where('is_paid', 0)->where('from_user_id', Auth::id());
+   
+   $paiement->update([
+       'is_paid' => 1
+   ]);
+    return redirect()->back();
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Paiement $paiement)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Paiement $paiement)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Paiement $paiement)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Paiement $paiement)
-    {
-        //
-    }
+}
 }
