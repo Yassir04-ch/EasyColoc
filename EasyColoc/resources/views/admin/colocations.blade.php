@@ -90,18 +90,16 @@
           <p class="text-[#555] text-xs font-medium">Colocations</p>
           <div class="w-8 h-8 bg-[#00e5a0]/10 rounded-lg flex items-center justify-center text-sm">🏠</div>
         </div>
-        <p class="text-3xl font-extrabold text-white">342</p>
-        <p class="text-xs text-[#00e5a0] mt-1">↑ +5 cette semaine</p>
-      </div>
+        <p class="text-3xl font-extrabold text-white">{{$colocations->count()}}</p>
+       </div>
 
       <div class="bg-[#141414] border border-white/5 rounded-2xl p-5 hover:-translate-y-0.5 transition-all">
         <div class="flex items-center justify-between mb-3">
           <p class="text-[#555] text-xs font-medium">Dépenses totales</p>
           <div class="w-8 h-8 bg-[#ffe234]/10 rounded-lg flex items-center justify-center text-sm">💸</div>
         </div>
-        <p class="text-3xl font-extrabold text-[#ffe234]">248K</p>
-        <p class="text-xs text-[#00e5a0] mt-1">↑ +18K ce mois</p>
-      </div>
+        <p class="text-3xl font-extrabold text-[#ffe234]">{{$depensetotal}}DH</p>
+       </div>
 
       <div class="bg-[#141414] border border-white/5 rounded-2xl p-5 hover:-translate-y-0.5 transition-all">
         <div class="flex items-center justify-between mb-3">
@@ -109,8 +107,7 @@
           <div class="w-8 h-8 bg-[#ff4f91]/10 rounded-lg flex items-center justify-center text-sm">🚫</div>
         </div>
         <p class="text-3xl font-extrabold text-[#ff4f91]">{{$usersban->count()}}</p>
-        <p class="text-xs text-[#555] mt-1">→ Aucun ce mois</p>
-      </div>
+       </div>
 
     </div>
 
