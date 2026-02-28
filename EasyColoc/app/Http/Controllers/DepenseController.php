@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreDepenseRequest;
 use App\Models\Colocation;
 use App\Models\Depense;
 use App\Models\Paiement;
@@ -32,14 +33,9 @@ class DepenseController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request,Colocation $colocation)
+    public function store(StoreDepenseRequest $request,Colocation $colocation)
     {
-        $validation = $request->validate([
-            'titre' => 'required|string',
-            'price' => 'required',
-            'date' => 'required|date',
-            'categorie_id'=> 'required',
-        ]);
+        $validation = $request->validated();
         
         $validation['user_id'] = Auth::id();
         $validation['colocation_id'] = $colocation->id;

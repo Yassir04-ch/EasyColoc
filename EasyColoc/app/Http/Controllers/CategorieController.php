@@ -27,13 +27,13 @@ class CategorieController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request , Colocation $colocation)
     {
 
         $validation = $request->validate([
             'categorie_name'=>'required|string',
-            'colocation_id'=>'required'
         ]);
+        $validation['colocation_id'] = $colocation->id;
          
         Categorie::create($validation);
         return redirect()->route('colocation.index');
@@ -60,13 +60,14 @@ class CategorieController extends Controller
      */
     public function update(Request $request, Categorie $categorie)
     {
+        
        $validation = $request->validate([
         'categorie_name'=>'required|string',
        ]);
 
        $categorie->update($validation);
 
-       return redirect()->route('categorie.index');
+       return redirect()->route('colocation.index');
     }
 
     /**

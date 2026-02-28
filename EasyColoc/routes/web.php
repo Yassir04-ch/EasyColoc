@@ -34,7 +34,8 @@ Route::middleware('CheckBanned')->group(function(){
     Route::get('/admin/colocations',[AdminController::class,'colocations'])->name('admin.colocations');
     Route::get('/admin',[AdminController::class,'index'])->name('admin.index');
     Route::get('/categorie/{colocation}/create',[CategorieController::class,'create'])->name('categorie.create');
-    Route::post('/categorie/{colocation}/store',[CategorieController::class,'create'])->name('categorie.store');
+    Route::post('/categorie/{colocation}/store',[CategorieController::class,'store'])->name('categorie.store');
+    Route::put('/categorie/{categorie}/update',[CategorieController::class,'update'])->name('categorie.update');
     Route::resource('categorie',CategorieController::class);
     Route::post('/invitation/{colocation}/store',[InvitationController::class,'store'])->name('invitation.store');
     Route::get('/invitation/accept/{token}',[InvitationController::class, 'accept'])->name('invitation.accept');
@@ -42,6 +43,7 @@ Route::middleware('CheckBanned')->group(function(){
     Route::post('/depense/{colocation}/store',[DepenseController::class,'store'])->name('depense.store');
     Route::get('/depense/{colocation}', [DepenseController::class, 'index'])->name('depense.index');
     Route::put('/paiement/{depense}/paye',[PaiementController::class,'paye'])->name('paiement.paye');
+    Route::put('/colocation/{colocation}/removemember',[ColocationController::class,'removemember'])->name('colocation.removemember');
 
     });
 

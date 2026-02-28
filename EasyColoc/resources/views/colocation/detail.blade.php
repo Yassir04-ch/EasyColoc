@@ -34,6 +34,7 @@
     <a href="{{route('depense.index',$colocation)}}" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-500 no-underline">
       <span>💸</span> Dépenses
     </a>
+    
 
     @if(Auth::id() == $owner->id)
     <p class="text-gray-700 text-xs font-bold uppercase tracking-widest px-3 mb-2 mt-4">Gestion</p>
@@ -50,6 +51,13 @@
       class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-500 no-underline">
       <span>+</span> Ajouter dépense
     </a>
+
+     <div>
+      <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-red-500 hover:bg-red-500/10 transition-all text-left">Déconnexion</button>
+      </form>
+    </div>
   </nav>
 
   <div class="border-t border-white/5 pt-4 flex flex-col gap-1">
@@ -81,7 +89,11 @@
       <h1 class="text-base font-bold">{{ $colocation->colocation_name }}</h1>
       <p class="text-gray-600 text-xs">{{ $colocation->users->count() }} membre(s) · Créée le {{ $colocation->created_at->format('d/m/Y') }}</p>
     </div>
-
+      @if(session('invitation'))
+        <div class="bg-emerald-400/10 border border-emerald-400/30 rounded-xl px-4 py-3 mb-6 flex items-center gap-2">
+          <p class="text-emerald-400 text-sm">{{ session('invitation') }}</p>
+        </div> 
+      @endif
     @if(Auth::id() == $owner->id)
     <form action="{{ route('invitation.store', $colocation) }}" method="POST" class="hidden md:flex items-center gap-2">
       @csrf
@@ -149,7 +161,7 @@
               <th class="px-6 py-3 text-gray-600 text-xs uppercase font-bold">Collaborateur</th>
               <th class="px-6 py-3 text-gray-600 text-xs uppercase font-bold">Rôle</th>
               <th class="px-6 py-3 text-gray-600 text-xs uppercase font-bold text-right">État</th>
-            </tr>
+             </tr>
           </thead>
           <tbody class="divide-y divide-white/[0.03]">
             @foreach($colocation->users as $user)
@@ -176,13 +188,27 @@
                   </span>
                 </div>
               </td>
+              @if(Auth::id() == $owner->id)
+              <td class="px-6 py-4 text-right">
+                @if($user->id != $owner->id && $user->pivot->status =='active')
+                  <form method="POST" action="{{route('colocation.removemember',$colocation)}}">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" name="user_id" value="{{$user->id}}">
+                    <button type="submit" class="text-red-500 hover:text-red-400 text-xs px-2 py-1.5 rounded-lg hover:bg-red-400/10 transition-all">
+                      Retirer
+                    </button>
+                  </form>
+                @endif
+              </td>
+              @endif
             </tr>
             @endforeach
           </tbody>
         </table>
       </div>
 
-      <!-- CATEGORIES -->
+      <!-- categorie -->
       <div id="categories" class="card">
         <div class="flex items-center justify-between px-6 py-4 border-b border-white/5">
           <h2 class="font-bold text-sm flex items-center gap-2">

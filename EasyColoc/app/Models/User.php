@@ -64,9 +64,9 @@ class User extends Authenticatable
         return $this->hasMany(depense::class);
     }
 
-    public function paymentsSent()
+    public function paiements()
     {
-        return $this->hasMany(Paiement::class);
+        return $this->hasMany(Paiement::class, 'from_user_id');
     }
 
     public function invitation(){

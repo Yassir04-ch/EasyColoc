@@ -31,6 +31,11 @@
     <div>
       <h1 class="text-2xl font-bold">Toutes les colocations</h1>
       <p class="text-[#555] text-sm mt-1">Découvrez les colocations actives sur la plateforme</p>
+      @if(session('exite'))
+        <div class="bg-emerald-400/10 border border-emerald-400/30 rounded-xl px-4 py-3 mb-6 flex items-center gap-2">
+          <p class="text-emerald-400 text-sm">{{ session('exite') }}</p>
+        </div> 
+      @endif
     </div>
   </div>
 
@@ -66,7 +71,7 @@
             <p class="font-bold text-base">{{ $colocation->description }}</p>
         </div>
       </div>
-      @if($colocation->status == 'active' )
+      @if($colocation->status == 'active'  && $colocation->users->find(auth()->id())->pivot->status == 'active')
       <div class="pt-1 border-t border-white/[0.04]">
         <a href="{{route('colocation.show',$colocation)}}" class="block w-full text-center bg-white/5 text-[#888] hover:text-white border border-white/[0.07] text-sm font-semibold py-2.5 rounded-xl transition-all no-underline">
           Détails de la colocation

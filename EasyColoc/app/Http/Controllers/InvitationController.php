@@ -33,7 +33,7 @@ class InvitationController extends Controller
         ]);
 
         Mail::to($request->email)->send(new InvitationMail($token));
-        return back();
+        return back()->with('invitation',"Invitation envoyée");
 
     }
 
