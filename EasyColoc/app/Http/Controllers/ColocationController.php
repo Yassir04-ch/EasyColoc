@@ -114,7 +114,7 @@ class ColocationController extends Controller
     public function removemember(Request $request,Colocation $colocation){
         $colocation->users()->wherePivot('user_id',$request->user_id)->update(['status'=>'left']);
          $user = User::where('id', $request->user_id)->first();
-          return redirect()->back();
+         return redirect()->back();
     }
 
     /**
@@ -123,7 +123,7 @@ class ColocationController extends Controller
     public function destroy(Colocation $colocation)
     {
          $colocation->update(['status' => 'cancelled']);
-          $colocation->users->pivot->update(['status' => 'left']);
+         $colocation->users()->wherePivot('user_id',Auth::id())->update(['status'=>'left']);
          return redirect()->route('colocation.index');
     }
 }
