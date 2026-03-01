@@ -17,17 +17,18 @@
   </a>
 
   <ul class="hidden md:flex items-center gap-8 list-none m-0 p-0">
-    <li><a href="#features" class="text-[#888] text-sm font-medium hover:text-white transition-colors no-underline">Fonctionnalités</a></li>
-    <li><a href="#how"      class="text-[#888] text-sm font-medium hover:text-white transition-colors no-underline">Comment ça marche</a></li>
-    <li><a href="#roles"    class="text-[#888] text-sm font-medium hover:text-white transition-colors no-underline">Rôles</a></li>
+    @if(auth()->check())
     <li>
-      <a href="#" class="bg-[#00e5a0] text-black text-sm font-bold px-5 py-2 rounded-lg hover:opacity-90 transition-opacity no-underline">
-        Commencer →
-      </a>
+      <div>
+        <form method="POST" action="{{ route('logout') }}">
+          @csrf
+          <button class="text-sm text-[#888] hover:text-white transition-colors">Déconnexion</button>
+        </form>
+      </div>
     </li>
+    @endif
   </ul>
 
-  <!-- Mobile menu icon -->
   <button class="md:hidden text-white text-2xl">☰</button>
 </nav>
 
@@ -39,26 +40,20 @@
   <div class="absolute w-[350px] h-[350px] bg-[#4f8fff] rounded-full blur-[100px] opacity-[0.12] bottom-0 left-1/3 pointer-events-none"></div>
   <div class="absolute w-[280px] h-[280px] bg-[#ffe234] rounded-full blur-[100px] opacity-[0.12] bottom-10 right-10 pointer-events-none"></div>
 
-  <!-- Badge -->
-  <div class="relative z-10 inline-flex items-center gap-2 bg-[#00e5a0]/10 border border-[#00e5a0]/30 text-[#00e5a0] text-xs font-semibold tracking-widest uppercase px-4 py-2 rounded-full mb-8">
+   <div class="relative z-10 inline-flex items-center gap-2 bg-[#00e5a0]/10 border border-[#00e5a0]/30 text-[#00e5a0] text-xs font-semibold tracking-widest uppercase px-4 py-2 rounded-full mb-8">
     <span class="w-2 h-2 bg-[#00e5a0] rounded-full"></span>
     Nouveau — Gestion intelligente de colocation
   </div>
 
-  <!-- Title -->
-  <h1 class="relative z-10 text-5xl md:text-7xl font-extrabold leading-[1.05] tracking-tight mb-6">
-    Gérez votre <span class="text-[#00e5a0]">colocation</span><br/>
-    sans <span class="text-[#ff4f91]">stress</span> ni <span class="text-[#ffe234]">conflits</span>
-  </h1>
+   <h1 class="relative z-10 text-5xl md:text-7xl font-extrabold leading-[1.05] tracking-tight mb-6">
+    Gérez votre <span class="text-[#00e5a0]">colocation</span> </h1>
 
-  <!-- Subtitle -->
-  <p class="relative z-10 text-[#888] text-lg max-w-lg leading-relaxed mb-10">
+   <p class="relative z-10 text-[#888] text-lg max-w-lg leading-relaxed mb-10">
     Dépenses partagées, soldes en temps réel, rôles clairs.<br/>
     EasyColoc simplifie la vie commune pour tout le monde.
   </p>
 
-  <!-- CTAs -->
-  <div class="relative z-10 flex flex-wrap gap-4 justify-center">
+   <div class="relative z-10 flex flex-wrap gap-4 justify-center">
     <a href="/register" class="bg-[#00e5a0] text-black font-bold px-8 py-4 rounded-xl text-base hover:opacity-90 hover:-translate-y-1 transition-all no-underline flex items-center gap-2">
       🚀 S'inscrire
     </a>

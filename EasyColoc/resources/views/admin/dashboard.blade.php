@@ -135,7 +135,7 @@
                 <p class="text-sm font-medium">{{$user->firstname}} {{$user->lastname}}</p>
                 <p class="text-xs text-[#555]">{{$user->email}}</p>
               </div>
-            </div>
+             </div>
             <div class="flex items-center gap-2">
               <span class="bg-[#00e5a0]/10 text-[#00e5a0] text-xs px-2 py-0.5 rounded-full">{{$user->status_account}}</span>
               @if($user->status_account == 'actif')
