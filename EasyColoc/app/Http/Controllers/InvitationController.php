@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\InvitationRequest;
 use App\Mail\InvitationMail;
 use App\Models\Colocation;
 use App\Models\Invitation;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
@@ -18,16 +18,14 @@ class InvitationController extends Controller
         //
     }
 
-    public function store(Request $request,Colocation $colocation)
+    public function store(InvitationRequest $request,Colocation $colocation)
     {
-        $request->validate([
-            'email'=>'required|email',
-        ]);
-         $token = Str::random();
-         Invitation::create([
+        $validation = $request->validated();
+        $token = Str::random();
+        Invitation::create([
         'colocation_id' => $colocation->id,
         'user_id'    => Auth::id(),
-        'email'         => $request->email,
+        'email'         => $validation->email,
         'token'         =>$token,
         'status'        => 'pending',
         ]);
